@@ -8,7 +8,7 @@ API_TOKEN = os.environ.get("API_TOKEN")
 app = ApplicationBuilder().token(API_TOKEN).build()
 
 async def startproj(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    print('ok')
+    await update.message.reply_text(f'Hello {update.effective_user.first_name}')
 
 
 
