@@ -1,13 +1,17 @@
-from telegram import Update
-from telegram.ext import ApplicationBuilder, CommandHandler,ContextTypes
+from telegram import Update , InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.ext import ApplicationBuilder, CommandHandler,ContextTypes , CallbackQueryHandler
 import os
 
 API_TOKEN = os.environ.get("API_TOKEN")
 
 async def startproj(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    await update.message.reply_text(f'Hello {update.effective_user.first_name}')
-    await context.bot.send_message(chat_id=update.effective_chat.id,text=update.message)
-    # get data of message
+    keyboard= InlineKeyboardMarkup([
+        [InlineKeyboardButton('کلید های شورتکات' , callback_data='show_shortcuts')],
+        [InlineKeyboardButton('مشاهده وبسایت', url='https://amirimohsen.ir')],
+        [InlineKeyboardButton('پروفایل' , callback_data='user_profile')],
+    ])
+
+    await update.message.reply_text(f'سلام {update.effective_user.first_name} . خوش آمدی ', reply_markup=keyboard)
 
 
 def main():
